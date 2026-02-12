@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import emailjs from '@emailjs/browser';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -33,15 +34,42 @@ export function ContactPageContent() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate form submission (replace with actual backend later)
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        try {
+            await emailjs.send(
+                'service_vyo6d5t', // Service ID
+                'template_oxwiq1r', // Template ID
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    company: formData.company,
+                    website: formData.website,
+                    message: formData.message,
+                },
+                '55VneOagkBBvVQDN0' // Public Key
+            );
 
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        toast({
-            title: "Message sent!",
-            description: "Thank you for reaching out. I'll get back to you within 24 hours.",
-        });
+            setIsSubmitting(false);
+            setIsSubmitted(true);
+            toast({
+                title: "Message sent!",
+                description: "Thank you for reaching out. I'll get back to you within 24 hours.",
+            });
+            setFormData({
+                name: "",
+                email: "",
+                company: "",
+                website: "",
+                message: "",
+            });
+        } catch (error) {
+            console.error('FAILED...', error);
+            setIsSubmitting(false);
+            toast({
+                title: "Error sending message",
+                description: "Something went wrong. Please try again later.",
+                variant: "destructive",
+            });
+        }
     };
 
     return (

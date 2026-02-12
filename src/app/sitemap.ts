@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getWordPressPosts } from "@/lib/wordpress";
+import { toolsData } from "@/lib/tools-data";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await getWordPressPosts();
@@ -12,12 +13,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "/projects",
         "/contact",
         "/blog",
+        "/tools",
     ].map((route) => ({
         url: `${siteUrl}${route}`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: route === "" ? 1 : 0.8,
     }));
+
+    // const toolPages = toolsData.map((tool) => ({
+    //     url: `${siteUrl}/tools/${tool.slug}`,
+    //     lastModified: new Date(),
+    //     changeFrequency: "monthly" as const,
+    //     priority: 0.7,
+    // }));
 
     const dynamicPages = publishedPosts.map((post: any) => ({
         url: `${siteUrl}/blog/${post.slug}`,
