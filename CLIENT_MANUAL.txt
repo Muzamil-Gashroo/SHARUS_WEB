@@ -1,0 +1,107 @@
+================================================================================
+                    SHARIK RASOOL - WEBSITE USER MANUAL
+================================================================================
+
+Welcome to your new website! This guide will help you understand how your website 
+works and how you can manage it without any technical knowledge.
+
+--------------------------------------------------------------------------------
+1. OVERVIEW OF YOUR WEBSITE
+--------------------------------------------------------------------------------
+
+Your website is divided into two main parts:
+
+A. THE PUBLIC SITE: What your visitors see.
+   - Professional landing page.
+   - About & Project sections showcasing your work.
+   - A specialized "Tools" section with fun generators.
+   - A Blog where visitors can read your latest updates.
+
+B. THE ADMIN DASHBOARD: Your private control room.
+   - This is where you write, edit, and delete blog posts.
+   - Only you have access to this area.
+
+--------------------------------------------------------------------------------
+2. HOW TO ACCESS YOUR PRIVATE DASHBOARD (LOGIN)
+--------------------------------------------------------------------------------
+
+To manage your website, you need to log in:
+
+1. Open your internet browser.
+2. Type your website address followed by /admin 
+   (Example: www.yourwebsite.com/admin)
+3. You will be greeted by a Login screen.
+4. Enter your Email and Password provided to you.
+5. Click "Login".
+
+*Note: For your security, always log out when you are finished.*
+
+--------------------------------------------------------------------------------
+3. MANAGING YOUR BLOG POSTS
+--------------------------------------------------------------------------------
+
+Once you are logged in, you can easily manage your blog:
+
+WANT TO WRITE A NEW POST?
+1. In the Dashboard, find the "Create Post" button.
+2. Enter your Title.
+3. Write your content. You can use standard text.
+4. Choose if it should be a "Draft" (hidden) or "Published" (visible to everyone).
+5. Click "Save".
+
+WANT TO CHANGE AN OLD POST?
+1. Go to the "Posts" list in your Dashboard.
+2. Find the post you want to change.
+3. Click the "Edit" button (looks like a pencil).
+4. Make your changes and click "Update".
+
+WANT TO DELETE A POST?
+1. Find the post in the "Posts" list.
+2. Click the "Delete" button (looks like a trash can).
+3. Confirm that you want to delete it. *Warning: This cannot be undone!*
+
+--------------------------------------------------------------------------------
+4. TIPS FOR A GREAT WEBSITE
+--------------------------------------------------------------------------------
+
+- BLOG REGULARLY: Search engines (like Google) love websites that add new content 
+  at least once a month.
+- IMAGES: When uploading images or cover photos, try to use high-quality pictures 
+  that represent your topic.
+- LINKS: You can link to other websites or internal pages effortlessly.
+
+--------------------------------------------------------------------------------
+5. NEED HELP?
+--------------------------------------------------------------------------------
+
+If you have questions or something doesn't look right, don't hesitate to reach 
+out to your developer for support.
+
+Happy Blogging!
+
+================================================================================
+TECHNICAL NOTES (FOR THE DEVELOPER / DEPLOYMENT)
+================================================================================
+
+If you are the developer deploying this site, please follow these steps:
+
+1. ENVIRONMENT VARIABLES:
+   Before launching, you MUST set the following in your hosting provider
+   (Vercel/Netlify/etc.):
+   - MONGODB_URI: Your production database link.
+   - JWT_SECRET_KEY: A long, random string for security.
+   - NEXT_PUBLIC_SITE_URL: The live URL of the website.
+
+2. DATABASE INITIALIZATION:
+   The database will be empty on first launch. Run the following after 
+   setting the production URI in your local .env:
+   $ node scripts/seed-admin.js
+
+3. SEO VERIFICATION:
+   - Sitemap: yourdomain.com/sitemap.xml
+   - Robots: yourdomain.com/robots.txt
+
+4. SECURITY:
+   Ensure the `ADMIN_PASSWORD` and `JWT_SECRET_KEY` are changed from their 
+   defaults before going public.
+================================================================================
